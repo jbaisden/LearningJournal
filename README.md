@@ -1,27 +1,38 @@
 # LearningJournal
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.2.
+I'm creating this project as an accountability tool for personal learning
+and development.
 
-## Development server
+The premise is for use cases that go something like this:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+On Monday, you read a few articles about some up and coming tech.
+On Tuesday, you watch a few videos on youtube from someone in tech you follow. These
+videos directly pertain to *things* you're wanting to learn.
+On Friday, you start a course on Pluralsight/Udemy, etc.
 
-## Code scaffolding
+The following week you get busy. Not much down time to learn new stuff.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+So 2 weeks later you can get back to what you were working on ... which was ?? Gosh,
+what video did I watch. It made some real good points about observables and promises,
+but...Wait, I read a few articles too. Where were those? Plural Sight...YES! I'll
+pick up where I left off.
 
-## Build
+And just like that, the learning from 2 weeks ago is rendered fairly stale. So you spend who knows how much time just remembering where you left off. Additionally, this learning approach, unless well planned beforehand, is a pure shotgun attempt at learning. 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+What is the focus? What is the primary learning goal? What steps did I take towards
+that learning goal? Am I going off on a tangent with tech that's not really supporting
+my primary learning goal? Or do I need to do a course correction and take my learning
+ambitions into a different direction?
 
-## Running unit tests
+This project is an attempt to coral all that learning energy, focus it towards a 
+well-defined goal, and help you keep context of the steps you take towards that goal.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+So the next time you get busy, come back 2 weeks, 3 weeks, or even a month later,
+you come to your Learning Journal and see exactly what you last reviewed, what your main
+takeaways were, and let you get back to your learning with as little revamp as possible.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Another use case is for scenarios when we master certain tech bits and can no longer 
+recall exactly how we got to the point of learning we did. That's pretty useful information for others to have. It's also useful to us personally because it gives 
+at least a few data points on a tested and proven learning approach which could possibly
+be adapted for other technologies on our "some day I'll learn that" list.
+ 
