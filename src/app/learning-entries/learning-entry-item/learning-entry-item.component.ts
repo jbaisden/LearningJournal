@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LearningEntry } from 'src/app/models/learning-entry.model';
+import { LearningEntryService } from 'src/app/services/learning-entry.service';
 
 @Component({
   selector: 'app-learning-entry-item',
@@ -9,9 +10,17 @@ import { LearningEntry } from 'src/app/models/learning-entry.model';
 export class LearningEntryItemComponent implements OnInit {
 
   @Input() learningEntry: LearningEntry;
-  constructor() { }
+  constructor(private learningEntryService: LearningEntryService) { }
 
   ngOnInit() {
+  }
+
+  deleteLearningEntry(goalId: string) {
+    this.learningEntryService.deleteLearningEntry(goalId);
+  }
+
+  editLearningEntry(learningEntry: LearningEntry) {
+    this.learningEntryService.entryForEditting.next(learningEntry);
   }
 
 }

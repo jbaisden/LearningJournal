@@ -12,6 +12,7 @@ export class LearningEntryComponent implements OnInit {
 
   editEntry: LearningEntry;
   editMode: boolean = false;
+  types = ["Note", "Video", "Article", "Blog", "Book", "Course", "Walkthrough"]
 
   constructor(private learningEntryService: LearningEntryService) { }
 
@@ -26,7 +27,8 @@ export class LearningEntryComponent implements OnInit {
       console.warn(editEntry);
       this.editEntry = editEntry;
       this.form.setValue({
-        text: this.editEntry.text
+        text: this.editEntry.text,
+        type: this.editEntry.type
       });
       this.editMode = true;
     })

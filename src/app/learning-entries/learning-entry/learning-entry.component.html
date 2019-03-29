@@ -3,8 +3,15 @@
 </p>
 
 <form [formGroup]="this.form" (ngSubmit)="onSubmit()">
-  <input placeholder="Learning Entry Text" formControlName="text" type="text" class="input-field col s12">
-  <input placeholder="Learning Entry Type" formControlName="type" type="text" class="input-field col s12">
+
+  <select name="type" formControlName="type" id="type">
+    <option *ngFor="let type of types" value="{{type}}">{{type}}</option>
+  </select>
+  <br>
+  <textarea cols="25" rows="5" placeholder="Learning Entry Text" formControlName="text" type="text"
+    class="input-field col s12"></textarea>
+
+
   <button type="submit" class="waves-effect waves-light btn col s12">
     Submit
   </button>
