@@ -1,0 +1,7 @@
+<p> goal-list works! </p>
+
+<ul>
+  <li *ngFor="let goal of goals | async">
+    <app-goal-item [goal]="goal"></app-goal-item>
+  </li>
+</ul>
