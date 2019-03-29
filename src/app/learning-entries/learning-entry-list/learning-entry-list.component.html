@@ -1,0 +1,9 @@
+<p>
+  learning-entry-list works!
+</p>
+
+<ul>
+  <li *ngFor="let entry of learningEntries | async">
+    <app-learning-entry-item [learningEntry]="entry"></app-learning-entry-item>
+  </li>
+</ul>

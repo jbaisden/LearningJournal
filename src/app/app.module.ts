@@ -12,6 +12,10 @@ import { HomeComponent } from './home/home.component';
 import { GoalComponent } from './goals/goal/goal.component';
 import { GoalListComponent } from './goals/goal-list/goal-list.component';
 import { GoalItemComponent } from './goals/goal-item/goal-item.component';
+import { LearningEntryComponent } from './learning-entries/learning-entry/learning-entry.component';
+import { LearningEntryListComponent } from './learning-entries/learning-entry-list/learning-entry-list.component';
+import { LearningEntryItemComponent } from './learning-entries/learning-entry-item/learning-entry-item.component';
+import { LearningEntryService } from './services/learning-entry.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,10 @@ import { GoalItemComponent } from './goals/goal-item/goal-item.component';
     HomeComponent,
     GoalComponent,
     GoalListComponent,
-    GoalItemComponent
+    GoalItemComponent,
+    LearningEntryComponent,
+    LearningEntryListComponent,
+    LearningEntryItemComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +35,7 @@ import { GoalItemComponent } from './goals/goal-item/goal-item.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
-  providers: [GoalService],
+  providers: [GoalService, LearningEntryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
