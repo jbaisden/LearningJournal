@@ -15,6 +15,7 @@ export class GoalListComponent implements OnInit {
 
   ngOnInit() {
     this.goals = this.goalService.getGoals('Not Implemented Yet');
+    // this.goals = this.goalService.getGoalsOrdered('Not Implemented Yet');
   }
 
 

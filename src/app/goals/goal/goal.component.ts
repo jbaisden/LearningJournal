@@ -39,6 +39,8 @@ export class GoalComponent implements OnInit {
     } else {
       let goal = new Goal();
       goal = this.form.value;
+      // goal.goalText = this.form.get('goalText').value;
+      goal.dateTimeOfEntry = new Date();      
       this.goalService.createGoal(goal);
     }
 

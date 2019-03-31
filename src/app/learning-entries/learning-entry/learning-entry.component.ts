@@ -12,7 +12,7 @@ export class LearningEntryComponent implements OnInit {
 
   editEntry: LearningEntry;
   editMode: boolean = false;
-  types = ["Note", "Video", "Article", "Blog", "Book", "Course", "Walkthrough"]
+  types = ["Note", "Video", "Article", "Blog", "Book", "Course", "Walkthrough"];
 
   constructor(private learningEntryService: LearningEntryService) { }
 

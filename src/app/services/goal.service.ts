@@ -42,8 +42,8 @@ export class GoalService {
   }
 
   getGoals(userId: string): Observable<any> | Observable<Goal[]> {
-    return this.firestore.collection<Goal>(this.serviceCollection)
-      .snapshotChanges()
+    return this.firestore.collection<Goal>(this.serviceCollection, ref => ref.orderBy('dateTimeOfEntry', 'asc')  )    
+      .snapshotChanges()      
       .pipe(
         map(docChangeActions => {
           return docChangeActions.map(coffeeOrderDoc => {
@@ -51,10 +51,10 @@ export class GoalService {
             let goalId = coffeeOrderDoc.payload.doc.id;
             // console.warn({ goalId, ...data } as Goal);
             return { goalId, ...data } as Goal;
-          })
+          });
         })
       );
+    }
 
-  }
 
 }
