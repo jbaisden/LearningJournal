@@ -13,6 +13,7 @@ export class LearningEntryComponent implements OnInit {
   editEntry: LearningEntry;
   editMode: boolean = false;
   types = ["Note", "Video", "Article", "Blog", "Book", "Course", "Walkthrough"];
+  default = "Note";
 
   constructor(private learningEntryService: LearningEntryService) { }
 
@@ -31,7 +32,12 @@ export class LearningEntryComponent implements OnInit {
         type: this.editEntry.type
       });
       this.editMode = true;
-    })
+    });
+
+    this.form.patchValue({
+      type:  this.default
+    });
+
   }
 
   onSubmit() {
