@@ -3,13 +3,15 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { LearningEntry } from '../models/learning-entry.model';
+import { GoalService } from './goal.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LearningEntryService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore,
+    private goalService: GoalService) { }
 
   serviceCollection: string = "LearningEntries";
   entryForEditting: EventEmitter<LearningEntry> = new EventEmitter();
@@ -50,8 +52,12 @@ export class LearningEntryService {
           return docChangeActions.map(learningEntryDoc => {
             let data = learningEntryDoc.payload.doc.data();
             let learningEntryId = learningEntryDoc.payload.doc.id;
+            let learningEntry = { learningEntryId, ...data } as LearningEntry;
+            if (learningEntry.goalId) {
+              learningEntry.goal = this.goalService.getGoals(learningEntry.goalId);
+            }
             // console.warn({ goalId, ...data } as Goal);
-            return { learningEntryId, ...data } as LearningEntry;
+            return learningEntry;
           })
         })
       );

@@ -41,9 +41,20 @@ export class GoalService {
       .delete();
   }
 
+  getGoal(goalId: string): Goal {
+    let b = this
+      .firestore
+      .collection<Goal>(this.serviceCollection)
+      .doc(goalId)
+      .ref()
+      .get();
+
+    return b;
+  }
+
   getGoals(userId: string): Observable<any> | Observable<Goal[]> {
-    return this.firestore.collection<Goal>(this.serviceCollection, ref => ref.orderBy('dateTimeOfEntry', 'asc')  )    
-      .snapshotChanges()      
+    return this.firestore.collection<Goal>(this.serviceCollection, ref => ref.orderBy('dateTimeOfEntry', 'asc'))
+      .snapshotChanges()
       .pipe(
         map(docChangeActions => {
           return docChangeActions.map(coffeeOrderDoc => {
@@ -54,7 +65,7 @@ export class GoalService {
           });
         })
       );
-    }
+  }
 
 
 }

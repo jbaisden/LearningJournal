@@ -2,10 +2,14 @@
   learning-entry works!
 </p>
 
-<form [formGroup]="this.form" (ngSubmit)="onSubmit()">
+<form [formGroup]="this.form" (ngSubmit)="onSubmit()" #f>
+
+  <select name="goalId" formControlName="goalId" id="goalId">
+    <option *ngFor="let goal of goals | async; let g = index;" value="{{goal.goalId}}">{{goal.goalText}}</option>
+  </select>
 
   <select name="type" formControlName="type" id="type">
-    <option *ngFor="let type of types; let i = index;"  value="{{type}}">{{type}}</option>
+    <option *ngFor="let type of types; let i = index;" value="{{type}}">{{type}}</option>
   </select>
   <br>
 
@@ -13,7 +17,8 @@
     class="input-field col s12"></textarea>
 
 
-  <button type="submit" class="waves-effect waves-light btn col s12">
+  <button type="submit" class="waves-effect waves-light btn col s12" [disabled]="!this.form.valid">
     Submit
   </button>
+
 </form>

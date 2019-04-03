@@ -1,3 +1,5 @@
+import { Goal } from "./goal.model";
+
 export class LearningEntry {
 
     learningEntryId: string;
@@ -5,6 +7,7 @@ export class LearningEntry {
     text: string;
     type: string;
     dateTimeOfEntry: Date;
+    goal: Goal;
 
     constructor() {
         this.dateTimeOfEntry = new Date();
