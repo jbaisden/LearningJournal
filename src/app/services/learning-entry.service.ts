@@ -54,7 +54,8 @@ export class LearningEntryService {
             let learningEntryId = learningEntryDoc.payload.doc.id;
             let learningEntry = { learningEntryId, ...data } as LearningEntry;
             if (learningEntry.goalId) {
-              learningEntry.goal = this.goalService.getGoals(learningEntry.goalId);
+              console.warn("Getting goal for learning entry.");
+              learningEntry.goal = this.goalService.getGoal(learningEntry.goalId);
             }
             // console.warn({ goalId, ...data } as Goal);
             return learningEntry;

@@ -42,14 +42,41 @@ export class GoalService {
   }
 
   getGoal(goalId: string): Goal {
-    let b = this
-      .firestore
-      .collection<Goal>(this.serviceCollection)
-      .doc(goalId)
-      .ref()
-      .get();
+    let goal: Goal;
 
-    return b;
+    //guard against undefined 
+    if (!goalId) { return new Goal(); }
+
+    this
+      .firestore
+      .doc<Goal>("Goals/" + goalId)
+      .get()
+      .subscribe((doc) => {
+        let data = doc.data();
+        let goalId = doc.id;
+        console.warn(data);
+        console.warn(goalId);
+        goal = { goalId, ...data } as Goal;
+        return goal;
+      });
+
+    // console.warn("getting goal with goalid of : " + goalId);
+    // this.firestore
+    //   .collection(this.serviceCollection)
+    //   .doc<Goal>(goalId)
+    //   .get()
+    //   .pipe(
+    //     map(doc => {
+    //       console.warn("Goal found in collection. Inside map.");
+    //       let data = doc.data();
+    //       let goalId = doc.id
+    //       goal = { goalId, ...data } as Goal;
+    //       console.warn(goal);
+    //     })
+    //   );
+    // console.warn("Goal being returned: ");
+    // console.warn(goal);
+    return goal;
   }
 
   getGoals(userId: string): Observable<any> | Observable<Goal[]> {

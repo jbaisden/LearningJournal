@@ -1,4 +1,4 @@
-{{ this.learningEntry.goalId}} - {{ this.learningEntry.text}} - {{ this.learningEntry.type}}
+{{ this.learningEntry.goal?.goalText}} - {{ this.learningEntry.text}} - {{ this.learningEntry.type}}
 
 <button (click)="editLearningEntry(this.learningEntry)">Edit</button>
 <button (click)="deleteLearningEntry(this.learningEntry.learningEntryId)">Delete</button>
