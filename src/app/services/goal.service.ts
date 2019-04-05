@@ -41,24 +41,54 @@ export class GoalService {
       .delete();
   }
 
-  getGoal(goalId: string): Goal {
-    let goal: Goal;
+  getGoal(goalId: string): Observable<Goal> {
 
-    //guard against undefined 
-    if (!goalId) { return new Goal(); }
+    let docRef = this.firestore.collection(this.serviceCollection).doc(goalId);
 
-    this
-      .firestore
-      .doc<Goal>("Goals/" + goalId)
-      .get()
-      .subscribe((doc) => {
+    return docRef.get().pipe(
+      map((doc) => {
         let data = doc.data();
-        let goalId = doc.id;
-        console.warn(data);
-        console.warn(goalId);
-        goal = { goalId, ...data } as Goal;
-        return goal;
-      });
+        let id = doc.id;
+        let g = new Goal();
+        g.goalText = data.goalText;
+        g.goalId = goalId;
+        g.dateTimeOfEntry = data.dateTimeOfEntry;
+        console.warn(g);
+        return g;
+      })
+    );
+
+    // docRef
+    //   .get()
+    //   .pipe(
+    //     map((doc) => {
+    //       console.warn("Inside .pipe(map...)");
+    //       if (doc.exists) {
+    //         console.warn("Inside doc.exists");
+    //         let data = doc.data();
+    //         let id = doc.id;
+    //         goal = { id, ...data } as unknown as Goal;
+    //         console.warn(goal);
+    //         return goal;
+    //       }
+    //     })
+    //   );
+
+    // console.warn(docRef);
+    // this
+    //   .firestore
+    //   .doc<Goal>("Goals/" + goalId)
+    //   .ref
+    //   .get()
+
+    //   .subscribe((doc) => {
+    //     let data = doc.data();
+    //     let goalId = doc.id;
+    //     console.warn(data);
+    //     console.warn(goalId);
+    //     goal = { goalId, ...data } as Goal;
+    //     return goal;
+    //   });
 
     // console.warn("getting goal with goalid of : " + goalId);
     // this.firestore
@@ -76,7 +106,6 @@ export class GoalService {
     //   );
     // console.warn("Goal being returned: ");
     // console.warn(goal);
-    return goal;
   }
 
   getGoals(userId: string): Observable<any> | Observable<Goal[]> {

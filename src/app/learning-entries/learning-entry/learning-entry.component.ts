@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { LearningEntryService } from 'src/app/services/learning-entry.service';
 import { LearningEntry } from 'src/app/models/learning-entry.model';
 import { FormGroup, FormControl, RequiredValidator, Validators } from '@angular/forms';
 import { GoalService } from 'src/app/services/goal.service';
 import { Goal } from 'src/app/models/goal.model';
 import { Observable } from 'rxjs';
+import { getLocaleId } from '@angular/common';
 
 @Component({
   selector: 'app-learning-entry',
@@ -13,6 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class LearningEntryComponent implements OnInit {
 
+  @Input() goal: Goal;
   editEntry: LearningEntry;
   editMode: boolean = false;
   types = ["Note", "Video", "Article", "Blog", "Book", "Course", "Walkthrough"];
@@ -23,11 +25,11 @@ export class LearningEntryComponent implements OnInit {
 
   form = new FormGroup({
     text: new FormControl('', Validators.required),
-    goalId: new FormControl('', Validators.required),
+    // goalId: new FormControl('', Validators.required),
     type: new FormControl('', Validators.required)
   });
 
-  goals: Observable<Goal[]>;
+  // goals: Observable<Goal[]>;
 
   ngOnInit() {
     this.learningEntryService.entryForEditting.subscribe((editEntry: LearningEntry) => {
@@ -35,15 +37,17 @@ export class LearningEntryComponent implements OnInit {
       console.warn(editEntry);
       this.editEntry = editEntry;
       this.editMode = true;
+
       //Using PatchValue because goalId could be null
       this.form.patchValue({
         text: this.editEntry.text,
         type: this.editEntry.type,
         goalId: this.editEntry.goalId
       });
+
     });
 
-    this.goals = this.goalService.getGoals('');
+    // this.goals = this.goalService.getGoals('');
     this.form.patchValue({
       type: this.default
     });

@@ -7,7 +7,6 @@ export class LearningEntry {
     text: string;
     type: string;
     dateTimeOfEntry: Date;
-    goal: Goal;
 
     constructor() {
         this.dateTimeOfEntry = new Date();

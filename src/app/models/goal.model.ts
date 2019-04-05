@@ -4,14 +4,12 @@ export class Goal {
     parentGoalId: string;
     goalText: string;
     progress: string;
+    archived: boolean;
+    isComplete: boolean;
     dateTimeOfEntry: Date;
 
     constructor() {
         this.dateTimeOfEntry = new Date();
-     }
-
-    public IsSubGoal(): boolean {
-        return this.parentGoalId === null;
     }
 
 }

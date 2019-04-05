@@ -1,12 +1,5 @@
-<p>
-  learning-entry works!
-</p>
-
+<h3>Add Learning Entry</h3>
 <form [formGroup]="this.form" (ngSubmit)="onSubmit()" #f>
-
-  <select name="goalId" formControlName="goalId" id="goalId">
-    <option *ngFor="let goal of goals | async; let g = index;" value="{{goal.goalId}}">{{goal.goalText}}</option>
-  </select>
 
   <select name="type" formControlName="type" id="type">
     <option *ngFor="let type of types; let i = index;" value="{{type}}">{{type}}</option>
@@ -15,7 +8,6 @@
 
   <textarea cols="25" rows="5" placeholder="Learning Entry Text" formControlName="text" type="text"
     class="input-field col s12"></textarea>
-
 
   <button type="submit" class="waves-effect waves-light btn col s12" [disabled]="!this.form.valid">
     Submit

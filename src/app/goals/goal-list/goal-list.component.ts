@@ -12,10 +12,14 @@ export class GoalListComponent implements OnInit {
 
   constructor(private goalService: GoalService) { }
   goals: Observable<Goal[]>;
+  showAddGoal: boolean = false;
 
   ngOnInit() {
     this.goals = this.goalService.getGoals('Not Implemented Yet');
-    // this.goals = this.goalService.getGoalsOrdered('Not Implemented Yet');
+  }
+
+  showGoal() {
+    this.showAddGoal = true;
   }
 
 

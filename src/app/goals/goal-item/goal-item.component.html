@@ -1,6 +1,10 @@
-<span>
-    {{ this.goal.goalId }} <strong>{{ this.goal.goalText }}</strong>
-</span>
-
-<button (click)="editGoal(this.goal)">Edit</button>
-<button (click)="deleteGoal(this.goal.goalId)">Delete</button>
+<table width="450px">
+    <tr>
+        <td width="75%">
+            <strong>{{ this.goal.goalText }}</strong>
+            <app-learning-entry-list [goal]="this.goal"></app-learning-entry-list>
+        </td>
+        <!-- <td><button (click)="editGoal(this.goal)">Edit</button></td>
+        <td><button (click)="deleteGoal(this.goal.goalId)">Delete</button></td> -->
+    </tr>
+</table>

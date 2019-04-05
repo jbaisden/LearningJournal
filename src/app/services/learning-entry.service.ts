@@ -10,7 +10,8 @@ import { GoalService } from './goal.service';
 })
 export class LearningEntryService {
 
-  constructor(private firestore: AngularFirestore,
+  constructor(
+    private firestore: AngularFirestore,
     private goalService: GoalService) { }
 
   serviceCollection: string = "LearningEntries";
@@ -53,10 +54,10 @@ export class LearningEntryService {
             let data = learningEntryDoc.payload.doc.data();
             let learningEntryId = learningEntryDoc.payload.doc.id;
             let learningEntry = { learningEntryId, ...data } as LearningEntry;
-            if (learningEntry.goalId) {
-              console.warn("Getting goal for learning entry.");
-              learningEntry.goal = this.goalService.getGoal(learningEntry.goalId);
-            }
+            // if (learningEntry.goalId) {
+            //   console.warn("Getting goal for learning entry.");
+            //   learningEntry.goal = this.goalService.getGoal(learningEntry.goalId);
+            // }
             // console.warn({ goalId, ...data } as Goal);
             return learningEntry;
           })
