@@ -25,13 +25,14 @@ export class GoalService {
   }
 
   updateGoal(data: Goal) {
+
     console.warn("updating: ");
     console.warn(data);
 
     return this.firestore
       .collection(this.serviceCollection)
       .doc(data.goalId)
-      .set(data);
+      .set(Object.assign({}, data));
   }
 
   deleteGoal(goalId: string) {

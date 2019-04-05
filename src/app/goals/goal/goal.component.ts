@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { GoalService } from 'src/app/services/goal.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Goal } from 'src/app/models/goal.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -14,7 +14,6 @@ export class GoalComponent implements OnInit {
 
 
   editGoal: Goal;
-  goal: Goal;
   editMode: boolean = false;
   @Input() visible: boolean = false;
 
@@ -23,7 +22,9 @@ export class GoalComponent implements OnInit {
   });
 
 
-  constructor(private goalService: GoalService,
+  constructor(
+    private goalService: GoalService,
+    private router: Router,
     private route: ActivatedRoute) {
   }
 
@@ -40,32 +41,18 @@ export class GoalComponent implements OnInit {
       (params) => {
         if (params['goalId']) {
           this.goalService.getGoal(params['goalId']).subscribe((goal) => {
-            this.goal = goal;
+            this.editGoal = goal;
+            if (this.editGoal) {
+              this.editMode = true;
+              this.form.setValue({
+                goalText: this.editGoal.goalText
+              });
+            }
           });
         }
       }
     );
 
-    console.warn(this.editGoal);
-
-    if (this.editGoal) {
-      this.editMode = true;
-      this.form.setValue({
-        goalText: this.editGoal.goalText
-      });
-
-    }
-
-    // this.goalService.goalForEditting.subscribe((editGoal: Goal) => {
-    //   console.warn("goal marked for editting: ");
-    //   console.warn(editGoal);
-    //   this.visible = true;
-    //   this.editGoal = editGoal;
-    //   this.form.setValue({
-    //     goalText: this.editGoal.goalText
-    //   });
-    //   this.editMode = true;
-    // })
   }
 
   onSubmit() {
@@ -80,6 +67,8 @@ export class GoalComponent implements OnInit {
       goal.dateTimeOfEntry = new Date();
       this.goalService.createGoal(goal);
     }
+
+    this.router.navigate(['/goals']);
 
     this.editGoal = null;
     this.editMode = false;
