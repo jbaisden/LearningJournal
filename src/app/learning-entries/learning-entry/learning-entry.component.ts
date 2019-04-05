@@ -6,6 +6,7 @@ import { GoalService } from 'src/app/services/goal.service';
 import { Goal } from 'src/app/models/goal.model';
 import { Observable } from 'rxjs';
 import { getLocaleId } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-learning-entry',
@@ -20,8 +21,13 @@ export class LearningEntryComponent implements OnInit {
   types = ["Note", "Video", "Article", "Blog", "Book", "Course", "Walkthrough"];
   default = "Note";
 
-  constructor(private learningEntryService: LearningEntryService,
-    private goalService: GoalService) { }
+  constructor(
+    private learningEntryService: LearningEntryService,
+    private router: Router,
+    private route: ActivatedRoute) {
+  }
+
+  goalId: string;
 
   form = new FormGroup({
     text: new FormControl('', Validators.required),
@@ -29,9 +35,8 @@ export class LearningEntryComponent implements OnInit {
     type: new FormControl('', Validators.required)
   });
 
-  // goals: Observable<Goal[]>;
-
   ngOnInit() {
+
     this.learningEntryService.entryForEditting.subscribe((editEntry: LearningEntry) => {
       console.warn("learning entry marked for editting: ");
       console.warn(editEntry);
@@ -51,6 +56,7 @@ export class LearningEntryComponent implements OnInit {
     this.form.patchValue({
       type: this.default
     });
+
 
   }
 
