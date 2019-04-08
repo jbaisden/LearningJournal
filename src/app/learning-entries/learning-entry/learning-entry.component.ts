@@ -27,6 +27,7 @@ export class LearningEntryComponent implements OnInit {
     private route: ActivatedRoute) {
   }
 
+  learningEntryId: string;
   goalId: string;
 
   form = new FormGroup({
@@ -39,49 +40,41 @@ export class LearningEntryComponent implements OnInit {
 
     this.route.params.subscribe(
       (params) => {
-        if (params['goalId'] && params['learningEntryId']) {
-          this.learningEntryService.getLearningEntry(params['goalId'], params['learningEntryId']).subscribe((learningEntry) => {
+
+        this.goalId = params['goalId'];
+        this.learningEntryId = params['learningEntryId'];
+        let gid = this.goalId;
+        let eid = this.learningEntryId;
+
+        if (gid && eid) {
+          this.learningEntryService.getLearningEntry(gid, eid).subscribe((learningEntry) => {
             this.editEntry = learningEntry;
             if (this.editEntry) {
               this.editMode = true;
-              this.goalId = params['goalId'];
+              this.goalId = gid;
               this.form.setValue({
                 text: this.editEntry.text,
                 type: this.editEntry.type,
-                // goalId: params['goalId'],
               });
             }
           });
-        } else if (params['goalId']) {
-          this.goalId = params['goalId'];
+        } else if (gid) {
+          this.goalId = gid;
         }
 
-        console.warn(this.goalId);
+        console.warn("goal id: ");
+        console.warn(gid);
+        console.warn("learning entry id: ");
+        console.warn(eid);
+        console.warn("learning entry object: ");
+        console.warn(this.editEntry);
+
       }
     );
 
     this.form.patchValue({
       type: this.default
     });
-
-    // this.learningEntryService.entryForEditting.subscribe((editEntry: LearningEntry) => {
-    //   console.warn("learning entry marked for editting: ");
-    //   console.warn(editEntry);
-    //   this.editEntry = editEntry;
-    //   this.editMode = true;
-
-    //   //Using PatchValue because goalId could be null
-    //   this.form.patchValue({
-    //     text: this.editEntry.text,
-    //     type: this.editEntry.type,
-    //     goalId: this.editEntry.goalId
-    //   });
-
-    // });
-
-    // this.goals = this.goalService.getGoals('');
-
-
 
   }
 

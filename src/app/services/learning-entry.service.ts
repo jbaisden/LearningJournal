@@ -17,8 +17,8 @@ export class LearningEntryService {
   serviceCollection: string = "/LearningEntries/";
   entryForEditting: EventEmitter<LearningEntry> = new EventEmitter();
 
-  private getCollectionString(goalId:string,learningEntryId:string = null ) {
-    if(learningEntryId) {
+  private getCollectionPath(goalId: string, learningEntryId: string = null) {
+    if (learningEntryId) {
       return "Goals/" + goalId + this.serviceCollection + learningEntryId;
     } else {
       return "Goals/" + goalId + this.serviceCollection;
@@ -30,7 +30,7 @@ export class LearningEntryService {
     console.warn(data);
     return new Promise<any>((resolve, reject) => {
       this.firestore
-        .collection(this.getCollectionString(data.goalId))
+        .collection(this.getCollectionPath(data.goalId))
         .add(data)
         .then(res => { }, err => reject(err));
     });
@@ -41,21 +41,21 @@ export class LearningEntryService {
     console.warn(data);
 
     return this.firestore
-      .collection(this.getCollectionString(data.goalId, data.learningEntryId))
+      .collection(this.getCollectionPath(data.goalId))
       .doc(data.learningEntryId)
       .set(Object.assign({}, data));
   }
 
-  deleteLearningEntry(goalId:string, learningEntryId: string) {
+  deleteLearningEntry(goalId: string, learningEntryId: string) {
     return this.firestore
-      .collection(this.getCollectionString(goalId))
+      .collection(this.getCollectionPath(goalId))
       .doc(learningEntryId)
       .delete();
   }
 
-  getLearningEntry(goalId: string, learningEntryId:string): Observable<LearningEntry> {
+  getLearningEntry(goalId: string, learningEntryId: string): Observable<LearningEntry> {
 
-    let docRef = this.firestore.collection("goals/" + goalId + "/LearningEntries/").doc(learningEntryId);
+    let docRef = this.firestore.collection("Goals/" + goalId + "/LearningEntries/").doc(learningEntryId);
 
     console.warn(docRef);
 
@@ -63,19 +63,21 @@ export class LearningEntryService {
       map((doc) => {
         let data = doc.data();
         let le = new LearningEntry();
-        le.dateTimeOfEntry =  data.dateTimeOfEntry;
+        le.dateTimeOfEntry = data.dateTimeOfEntry;
         le.goalId = goalId;
         le.text = data.text;
         le.type = data.type;
-        console.warn(le);
+        // console.warn(le);
         return le;
+        // return { doc.id, ...Object.assign({}, doc.data()) };
       })
     );
 
   }
 
-  getLearningEntries(userId: string): Observable<any> | Observable<LearningEntry[]> {
-    return this.firestore.collection<LearningEntry>(this.serviceCollection)
+  getLearningEntries(goalId: string, userId: string): Observable<any> | Observable<LearningEntry[]> {
+    return this.firestore
+      .collection<LearningEntry>(this.getCollectionPath(goalId))
       .snapshotChanges()
       .pipe(
         map(docChangeActions => {

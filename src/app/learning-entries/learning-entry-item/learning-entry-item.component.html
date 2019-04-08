@@ -1,4 +1,11 @@
-{{ this.learningEntry.text}}
-
-<!-- <button (click)="editLearningEntry(this.learningEntry)">Edit</button>
-<button (click)="deleteLearningEntry(this.learningEntry.learningEntryId)">Delete</button> -->
+<table>
+    <tr>
+        <td>{{ this.learningEntry.text}}</td>
+        <td>
+            <button (click)="editLearningEntry(this.learningEntry)">Edit</button>
+        </td>
+        <td>
+            <button (click)="deleteLearningEntry(this.learningEntry.learningEntryId)">Delete</button>
+        </td>
+    </tr>
+</table>

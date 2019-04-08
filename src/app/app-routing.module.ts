@@ -7,6 +7,7 @@ import { LearningEntryComponent } from './learning-entries/learning-entry/learni
 
 const routes: Routes = [
   { path: '', redirectTo: 'goals', pathMatch: 'full' },
+  { path: 'goals/:goalId/learningentries/:learningEntryId', component: LearningEntryComponent },
   { path: 'goals/edit/:goalId', component: GoalComponent },
   { path: 'goals', component: GoalListComponent },
   { path: 'learning-entry/add/:goalId', component: LearningEntryComponent }
