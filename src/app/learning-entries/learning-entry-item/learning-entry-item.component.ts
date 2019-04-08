@@ -17,12 +17,12 @@ export class LearningEntryItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  deleteLearningEntry(goalId: string) {
-    this.learningEntryService.deleteLearningEntry(goalId);
-  }
+  // deleteLearningEntry(goalId: string) {
+  //   this.learningEntryService.deleteLearningEntry(goalId);
+  // }
 
-  editLearningEntry(learningEntry: LearningEntry) {
-    this.learningEntryService.entryForEditting.next(learningEntry);
-  }
+  // editLearningEntry(learningEntry: LearningEntry) {
+  //   this.learningEntryService.entryForEditting.next(learningEntry);
+  // }
 
 }

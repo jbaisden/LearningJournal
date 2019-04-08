@@ -1,5 +1,5 @@
 <h3>Add Learning Entry</h3>
-<form [formGroup]="this.form" (ngSubmit)="onSubmit()" #f>
+<form [formGroup]="this.form" (ngSubmit)="onSubmit()" >
 
   <select name="type" formControlName="type" id="type">
     <option *ngFor="let type of types; let i = index;" value="{{type}}">{{type}}</option>

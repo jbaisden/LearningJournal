@@ -14,15 +14,23 @@ export class LearningEntryService {
     private firestore: AngularFirestore,
     private goalService: GoalService) { }
 
-  serviceCollection: string = "LearningEntries";
+  serviceCollection: string = "/LearningEntries/";
   entryForEditting: EventEmitter<LearningEntry> = new EventEmitter();
+
+  private getCollectionString(goalId:string,learningEntryId:string = null ) {
+    if(learningEntryId) {
+      return "Goals/" + goalId + this.serviceCollection + learningEntryId;
+    } else {
+      return "Goals/" + goalId + this.serviceCollection;
+    }
+  }
 
   createLearningEntry(data: LearningEntry) {
     console.warn("creating: ");
     console.warn(data);
     return new Promise<any>((resolve, reject) => {
       this.firestore
-        .collection(this.serviceCollection)
+        .collection(this.getCollectionString(data.goalId))
         .add(data)
         .then(res => { }, err => reject(err));
     });
@@ -33,16 +41,37 @@ export class LearningEntryService {
     console.warn(data);
 
     return this.firestore
-      .collection(this.serviceCollection)
+      .collection(this.getCollectionString(data.goalId, data.learningEntryId))
       .doc(data.learningEntryId)
-      .set(data);
+      .set(Object.assign({}, data));
   }
 
-  deleteLearningEntry(learningEntryId: string) {
+  deleteLearningEntry(goalId:string, learningEntryId: string) {
     return this.firestore
-      .collection(this.serviceCollection)
+      .collection(this.getCollectionString(goalId))
       .doc(learningEntryId)
       .delete();
+  }
+
+  getLearningEntry(goalId: string, learningEntryId:string): Observable<LearningEntry> {
+
+    let docRef = this.firestore.collection("goals/" + goalId + "/LearningEntries/").doc(learningEntryId);
+
+    console.warn(docRef);
+
+    return docRef.get().pipe(
+      map((doc) => {
+        let data = doc.data();
+        let le = new LearningEntry();
+        le.dateTimeOfEntry =  data.dateTimeOfEntry;
+        le.goalId = goalId;
+        le.text = data.text;
+        le.type = data.type;
+        console.warn(le);
+        return le;
+      })
+    );
+
   }
 
   getLearningEntries(userId: string): Observable<any> | Observable<LearningEntry[]> {

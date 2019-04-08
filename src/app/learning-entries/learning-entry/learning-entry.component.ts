@@ -37,49 +37,80 @@ export class LearningEntryComponent implements OnInit {
 
   ngOnInit() {
 
-    this.learningEntryService.entryForEditting.subscribe((editEntry: LearningEntry) => {
-      console.warn("learning entry marked for editting: ");
-      console.warn(editEntry);
-      this.editEntry = editEntry;
-      this.editMode = true;
+    this.route.params.subscribe(
+      (params) => {
+        if (params['goalId'] && params['learningEntryId']) {
+          this.learningEntryService.getLearningEntry(params['goalId'], params['learningEntryId']).subscribe((learningEntry) => {
+            this.editEntry = learningEntry;
+            if (this.editEntry) {
+              this.editMode = true;
+              this.goalId = params['goalId'];
+              this.form.setValue({
+                text: this.editEntry.text,
+                type: this.editEntry.type,
+                // goalId: params['goalId'],
+              });
+            }
+          });
+        } else if (params['goalId']) {
+          this.goalId = params['goalId'];
+        }
 
-      //Using PatchValue because goalId could be null
-      this.form.patchValue({
-        text: this.editEntry.text,
-        type: this.editEntry.type,
-        goalId: this.editEntry.goalId
-      });
+        console.warn(this.goalId);
+      }
+    );
 
-    });
-
-    // this.goals = this.goalService.getGoals('');
     this.form.patchValue({
       type: this.default
     });
+
+    // this.learningEntryService.entryForEditting.subscribe((editEntry: LearningEntry) => {
+    //   console.warn("learning entry marked for editting: ");
+    //   console.warn(editEntry);
+    //   this.editEntry = editEntry;
+    //   this.editMode = true;
+
+    //   //Using PatchValue because goalId could be null
+    //   this.form.patchValue({
+    //     text: this.editEntry.text,
+    //     type: this.editEntry.type,
+    //     goalId: this.editEntry.goalId
+    //   });
+
+    // });
+
+    // this.goals = this.goalService.getGoals('');
+
 
 
   }
 
   onSubmit() {
 
+    console.warn(this.editEntry);
+
     if (this.editMode) {
       this.editEntry.text = this.form.get('text').value;
       this.editEntry.type = this.form.get('type').value;
-      this.editEntry.goalId = this.form.get('goalId').value;
+      this.editEntry.goalId = this.goalId;
       this.learningEntryService.updateLearningEntry(this.editEntry);
     } else {
       let entry = new LearningEntry();
       entry = this.form.value;
       entry.dateTimeOfEntry = new Date();
+      entry.goalId = this.goalId;
       this.learningEntryService.createLearningEntry(entry);
     }
 
-    this.editEntry = null;
-    this.editMode = false;
-    this.form.reset();
-    this.form.patchValue({
-      type: this.default
-    });
+    this.router.navigate(['/goals']);
+
+    // this.editEntry = null;
+    // this.editMode = false;
+    // this.form.reset();
+    // this.form.patchValue({
+    //   type: this.default
+    // });
+
   }
 
 }
