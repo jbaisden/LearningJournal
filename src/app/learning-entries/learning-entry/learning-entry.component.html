@@ -14,7 +14,8 @@
     class="input-field col s12"></textarea>
 
   <button type="submit" class="waves-effect waves-light btn col s12" [disabled]="!this.form.valid">
-    Submit
+    Save
   </button>
+  <button type="button" [routerLink]="['/goals']">Cancel</button>
 
 </form>

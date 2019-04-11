@@ -5,7 +5,6 @@
     <button type="submit" class="waves-effect waves-light btn col s12">
       {{ !this.editMode ? 'Create' : 'Save'}}
     </button>
-    <button type="button" (click)="cancelEdit()">Cancel</button>
-    {{ this.editGoal?.goalText}}
+    <button type="button" [routerLink]="['/goals']">Cancel</button>
   </form>
 </div>
