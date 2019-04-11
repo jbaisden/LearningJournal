@@ -1,8 +1,9 @@
-<h3>Add Goal</h3>
+<h3>{{ !this.editMode ? 'Create' : 'Edit'}} Goal</h3>
 <div>
   <form [formGroup]="this.form" (ngSubmit)="onSubmit()">
-    <input placeholder="Goal Text" formControlName="goalText" type="text" class="input-field col s12">
-    <button type="submit" class="waves-effect waves-light btn col s12">
+    <textarea placeholder="Goal Text" formControlName="goalText" name="goalText" class="input-field col s12" cols="30"
+      rows="5"></textarea>
+    <button type="submit" [disabled]="!this.form.valid" class="waves-effect waves-light btn col s12">
       {{ !this.editMode ? 'Create' : 'Save'}}
     </button>
     <button type="button" [routerLink]="['/goals']">Cancel</button>

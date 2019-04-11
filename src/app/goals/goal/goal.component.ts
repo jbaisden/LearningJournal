@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GoalService } from 'src/app/services/goal.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Goal } from 'src/app/models/goal.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -18,7 +18,7 @@ export class GoalComponent implements OnInit {
   @Input() visible: boolean = false;
 
   form = new FormGroup({
-    goalText: new FormControl('')
+    goalText: new FormControl('', Validators.required)
   });
 
   constructor(
