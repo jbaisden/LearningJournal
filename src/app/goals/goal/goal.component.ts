@@ -21,7 +21,6 @@ export class GoalComponent implements OnInit {
     goalText: new FormControl('')
   });
 
-
   constructor(
     private goalService: GoalService,
     private router: Router,

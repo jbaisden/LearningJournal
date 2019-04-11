@@ -22,6 +22,7 @@ export class LearningEntryComponent implements OnInit {
   default = "Note";
 
   constructor(
+    private goalService: GoalService,
     private learningEntryService: LearningEntryService,
     private router: Router,
     private route: ActivatedRoute) {
@@ -29,6 +30,7 @@ export class LearningEntryComponent implements OnInit {
 
   learningEntryId: string;
   goalId: string;
+  $goal: Observable<Goal>;
 
   form = new FormGroup({
     text: new FormControl('', Validators.required),
@@ -58,8 +60,11 @@ export class LearningEntryComponent implements OnInit {
               });
             }
           });
-        } else if (gid) {
+        }
+
+        if (gid) {
           this.goalId = gid;
+          this.$goal = this.goalService.getGoal(gid);
         }
 
         console.warn("goal id: ");

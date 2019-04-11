@@ -1,4 +1,4 @@
-<h3>Goals <button type="button" (click)="showGoal()">Add Goal</button> </h3>
+<h3>Goals <button type="button" [routerLink]="['add']">Add Goal</button> </h3>
 
 <ul style="list-style-type: none;">
   <li *ngFor="let goal of goals | async">

@@ -67,9 +67,9 @@ export class LearningEntryService {
         le.goalId = goalId;
         le.text = data.text;
         le.type = data.type;
-        // console.warn(le);
+        le.learningEntryId = doc.id;
         return le;
-        // return { doc.id, ...Object.assign({}, doc.data()) };
+        //  return { doc.id, ...Object.assign({}, doc.data()) };
       })
     );
 
