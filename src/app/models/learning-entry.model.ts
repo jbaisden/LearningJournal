@@ -1,3 +1,5 @@
+import { Goal } from "./goal.model";
+
 export class LearningEntry {
 
     learningEntryId: string;

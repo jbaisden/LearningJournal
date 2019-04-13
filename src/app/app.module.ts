@@ -16,6 +16,8 @@ import { LearningEntryComponent } from './learning-entries/learning-entry/learni
 import { LearningEntryListComponent } from './learning-entries/learning-entry-list/learning-entry-list.component';
 import { LearningEntryItemComponent } from './learning-entries/learning-entry-item/learning-entry-item.component';
 import { LearningEntryService } from './services/learning-entry.service';
+import { DebugComponent } from './debug/debug.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { LearningEntryService } from './services/learning-entry.service';
     GoalItemComponent,
     LearningEntryComponent,
     LearningEntryListComponent,
-    LearningEntryItemComponent
+    LearningEntryItemComponent,
+    DebugComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

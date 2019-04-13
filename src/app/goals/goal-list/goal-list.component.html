@@ -1,7 +1,17 @@
-<p> goal-list works! </p>
+<h3>Goals <button type="button" [routerLink]="['add']">Add Goal</button> </h3>
 
-<ul>
+<ul style="list-style-type: none;">
   <li *ngFor="let goal of goals | async">
-    <app-goal-item [goal]="goal"></app-goal-item>
+    <table>
+      <tr>
+        <td>
+          <app-goal-item [goal]="goal"></app-goal-item>
+        </td>
+        <td><a [routerLink]="['edit', goal.goalId]">Edit Goal</a></td>
+        <td><a [routerLink]="['/learning-entry/add/', goal.goalId]">Add Learning Entry</a></td>
+      </tr>
+    </table>
+
+
   </li>
 </ul>
