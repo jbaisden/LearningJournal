@@ -6,7 +6,8 @@ import { GoalListComponent } from './goals/goal-list/goal-list.component';
 import { LearningEntryComponent } from './learning-entries/learning-entry/learning-entry.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'goals', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent},
   { path: 'goals/:goalId/learningentries/:learningEntryId', component: LearningEntryComponent },
   { path: 'goals/edit/:goalId', component: GoalComponent },
   { path: 'goals/add', component: GoalComponent },
