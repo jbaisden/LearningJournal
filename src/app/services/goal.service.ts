@@ -114,9 +114,9 @@ export class GoalService {
       .snapshotChanges()
       .pipe(
         map(docChangeActions => {
-          return docChangeActions.map(coffeeOrderDoc => {
-            let data = coffeeOrderDoc.payload.doc.data();
-            let goalId = coffeeOrderDoc.payload.doc.id;
+          return docChangeActions.map(goalDoc => {
+            let data = goalDoc.payload.doc.data();
+            let goalId = goalDoc.payload.doc.id;
             // console.warn({ goalId, ...data } as Goal);
             return { goalId, ...data } as Goal;
           });
