@@ -3,11 +3,12 @@
     <!-- <app-learning-entry-item [goal]="this.goal" [learningEntry]="entry"></app-learning-entry-item> -->
     <table>
       <tr>
-        <td width="50%">{{ entry.dateTimeOfEntry | date:'mm/dd/yyyy H:mm'}}</td>
+        <!-- <td width="50%">{{ entry.dateTimeOfEntry | date:'mm/dd/yyyy H:mm'}}</td> -->
         <td width="50%">{{ entry.text}}</td>
         <td width="15%">
           <!-- <a routerLink="['/goals',this.goal.goalId, 'LearningEntries', entry.learningEntryId]">Edit</a> -->
-          <button type="button" (click)="editLearningEntry(entry)">Edit</button>
+          <!-- <button type="button" (click)="editkLearningEntry(entry)">Edit</button> -->
+          <a [routerLink]="[getLearningEntryUrl(entry)]">Edit Note</a>
         </td>
         <td width="15%">
           <a href="">Delete</a>

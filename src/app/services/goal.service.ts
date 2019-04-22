@@ -9,7 +9,10 @@ import { Goal } from '../models/goal.model';
 })
 export class GoalService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore) {
+    console.log("GoalService constructed");
+  }
+
   serviceCollection: string = "Goals";
   goalForEditting: EventEmitter<Goal> = new EventEmitter();
 

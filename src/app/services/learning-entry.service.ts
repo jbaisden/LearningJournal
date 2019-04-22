@@ -12,7 +12,9 @@ export class LearningEntryService {
 
   constructor(
     private firestore: AngularFirestore,
-    private goalService: GoalService) { }
+    private goalService: GoalService) {
+    console.log("LearningEntryService constructed");
+  }
 
   serviceCollection: string = "/LearningEntries/";
   entryForEditting: EventEmitter<LearningEntry> = new EventEmitter();
