@@ -1,3 +1,12 @@
-HEADER COMPONENT
+<a [routerLink]="['/']">Home</a>
 
-<a [routerLink]="['/goals']">Goals</a>
+<span *ngIf="authService.isAuthenticated() else showLogIn">
+    |
+    <a [routerLink]="['/goals']">Goals</a>
+    |
+    <a style="cursor: pointer;" href="" (click)="logOut()">Log Out</a>
+</span>
+<ng-template #showLogIn>
+    | <a [routerLink]="['/auth/register']">Register</a>
+    | <a [routerLink]="['/auth/login']">Login</a>
+</ng-template>
