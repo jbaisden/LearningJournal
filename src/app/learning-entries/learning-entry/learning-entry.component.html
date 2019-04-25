@@ -10,8 +10,11 @@
   </select>
   <br>
 
-  <textarea cols="40" rows="5" placeholder="Learning Entry Text" formControlName="text" type="text"
-    class="input-field col s12"></textarea>
+  <!-- <textarea cols="40" rows="5" placeholder="Learning Entry Text" formControlName="text" type="text"
+    class="input-field col s12"></textarea> -->
+
+  <ckeditor [editor]="Editor" formControlName="text"></ckeditor>
+
 
   <button type="submit" class="waves-effect waves-light btn col s12" [disabled]="!this.form.valid">
     Save

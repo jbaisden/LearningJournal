@@ -25,6 +25,8 @@ import { AuthComponent } from './auth/auth.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import * as firebase from 'firebase';
+import { CssGridTestComponent } from './css-grid-test/css-grid-test.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import * as firebase from 'firebase';
     HeaderComponent,
     AuthComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    CssGridTestComponent
   ],
   imports: [
     FormsModule,
@@ -49,7 +52,8 @@ import * as firebase from 'firebase';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     // firebase.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    CKEditorModule
   ],
   providers: [GoalService, LearningEntryService, IsAuthorizedGuard, AuthService, AngularFireAuth],
   bootstrap: [AppComponent]

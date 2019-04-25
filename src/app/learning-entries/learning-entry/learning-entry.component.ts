@@ -7,6 +7,8 @@ import { Goal } from 'src/app/models/goal.model';
 import { Observable } from 'rxjs';
 import { getLocaleId } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
+// import * as ClassicEditor from '@ckeditor/ckeditor5-angular';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-learning-entry',
@@ -14,7 +16,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./learning-entry.component.css']
 })
 export class LearningEntryComponent implements OnInit {
-
+  public Editor = ClassicEditor;
   @Input() goal: Goal;
   editEntry: LearningEntry;
   editMode: boolean = false;
@@ -88,7 +90,8 @@ export class LearningEntryComponent implements OnInit {
     console.warn(this.editEntry);
 
     if (this.editMode) {
-      this.editEntry.text = this.form.get('text').value;
+      this.Editor.
+        this.editEntry.text = this.form.get('text').value;
       this.editEntry.type = this.form.get('type').value;
       this.editEntry.goalId = this.goalId;
       this.learningEntryService.updateLearningEntry(this.editEntry);
