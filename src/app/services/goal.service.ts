@@ -17,8 +17,8 @@ export class GoalService {
   goalForEditting: EventEmitter<Goal> = new EventEmitter();
 
   createGoal(data: Goal) {
-    console.warn("creating: ");
-    console.warn(data);
+    // console.warn("creating: ");
+    // console.warn(data);
     return new Promise<any>((resolve, reject) => {
       this.firestore
         .collection(this.serviceCollection)
@@ -28,10 +28,8 @@ export class GoalService {
   }
 
   updateGoal(data: Goal) {
-
-    console.warn("updating: ");
-    console.warn(data);
-
+    // console.warn("updating: ");
+    // console.warn(data);
     return this.firestore
       .collection(this.serviceCollection)
       .doc(data.goalId)
@@ -57,7 +55,7 @@ export class GoalService {
         g.goalText = data.goalText;
         g.goalId = goalId;
         g.dateTimeOfEntry = data.dateTimeOfEntry;
-        console.warn(g);
+        // console.warn(g);
         return g;
       })
     );

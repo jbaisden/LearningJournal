@@ -30,6 +30,7 @@ export class LearningEntryComponent implements OnInit {
     private route: ActivatedRoute) {
   }
 
+
   learningEntryId: string;
   goalId: string;
   $goal: Observable<Goal>;
@@ -44,7 +45,6 @@ export class LearningEntryComponent implements OnInit {
 
     this.route.params.subscribe(
       (params) => {
-
         this.goalId = params['goalId'];
         this.learningEntryId = params['learningEntryId'];
         let gid = this.goalId;
@@ -69,12 +69,12 @@ export class LearningEntryComponent implements OnInit {
           this.$goal = this.goalService.getGoal(gid);
         }
 
-        console.warn("goal id: ");
-        console.warn(gid);
-        console.warn("learning entry id: ");
-        console.warn(eid);
-        console.warn("learning entry object: ");
-        console.warn(this.editEntry);
+        // console.warn("goal id: ");
+        // console.warn(gid);
+        // console.warn("learning entry id: ");
+        // console.warn(eid);
+        // console.warn("learning entry object: ");
+        // console.warn(this.editEntry);
 
       }
     );
@@ -87,11 +87,10 @@ export class LearningEntryComponent implements OnInit {
 
   onSubmit() {
 
-    console.warn(this.editEntry);
+    // console.warn(this.editEntry);
 
     if (this.editMode) {
-      this.Editor.
-        this.editEntry.text = this.form.get('text').value;
+      this.editEntry.text = this.form.get('text').value;
       this.editEntry.type = this.form.get('type').value;
       this.editEntry.goalId = this.goalId;
       this.learningEntryService.updateLearningEntry(this.editEntry);

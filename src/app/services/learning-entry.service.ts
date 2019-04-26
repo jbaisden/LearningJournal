@@ -28,8 +28,8 @@ export class LearningEntryService {
   }
 
   createLearningEntry(data: LearningEntry) {
-    console.warn("creating: ");
-    console.warn(data);
+    // console.warn("creating: ");
+    // console.warn(data);
     return new Promise<any>((resolve, reject) => {
       this.firestore
         .collection(this.getCollectionPath(data.goalId))
@@ -39,9 +39,8 @@ export class LearningEntryService {
   }
 
   updateLearningEntry(data: LearningEntry) {
-    console.warn("updating: ");
-    console.warn(data);
-
+    // console.warn("updating: ");
+    // console.warn(data);
     return this.firestore
       .collection(this.getCollectionPath(data.goalId))
       .doc(data.learningEntryId)
@@ -58,14 +57,13 @@ export class LearningEntryService {
   getLearningEntry(goalId: string, learningEntryId: string): Observable<LearningEntry> {
 
     let docRef = this.firestore.collection("Goals/" + goalId + "/LearningEntries/").doc(learningEntryId);
-
-    console.warn(docRef);
-
+    // console.warn(docRef);
     return docRef.get().pipe(
       map((doc) => {
         let data = doc.data();
         let le = new LearningEntry();
-        le.dateTimeOfEntry = data.dateTimeOfEntry;
+        let ts = <firebase.firestore.Timestamp>data.dateTimeOfEntry;
+        le.dateTimeOfEntry = ts.toDate();
         le.goalId = goalId;
         le.text = data.text;
         le.type = data.type;
@@ -77,7 +75,9 @@ export class LearningEntryService {
 
   }
 
-  getLearningEntries(goalId: string, userId: string): Observable<any> | Observable<LearningEntry[]> {
+  getLearningEntries(goalId: string, userId: string):
+    Observable<any> |
+    Observable<LearningEntry[]> {
     return this.firestore
       .collection<LearningEntry>(this.getCollectionPath(goalId))
       .snapshotChanges()
@@ -87,16 +87,10 @@ export class LearningEntryService {
             let data = learningEntryDoc.payload.doc.data();
             let learningEntryId = learningEntryDoc.payload.doc.id;
             let learningEntry = { learningEntryId, ...data } as LearningEntry;
-            // if (learningEntry.goalId) {
-            //   console.warn("Getting goal for learning entry.");
-            //   learningEntry.goal = this.goalService.getGoal(learningEntry.goalId);
-            // }
-            // console.warn({ goalId, ...data } as Goal);
             return learningEntry;
           })
         })
       );
-
   }
 
 }
