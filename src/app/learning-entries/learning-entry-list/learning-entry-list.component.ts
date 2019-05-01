@@ -28,8 +28,6 @@ export class LearningEntryListComponent implements OnInit {
   }
 
   editLearningEntry(learningEntry: LearningEntry) {
-    // let url = "/goals/" + this.goal.goalId + "/learningentries/" +
-    //   learningEntry.learningEntryId;
     this.route.navigate([this.getLearningEntryUrl(learningEntry)]);
   }
 

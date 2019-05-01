@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   token: string;
+  email: string;
+  uid: string;
 
   constructor(private router: Router) { }
 
@@ -25,6 +27,9 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
+          let user = firebase.auth().currentUser;
+          this.uid = user.uid;
+          this.email = user.email;
           this.router.navigate(['/goals']);
           firebase.auth().currentUser.getIdToken()
             .then(
