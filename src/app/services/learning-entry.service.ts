@@ -20,19 +20,22 @@ export class LearningEntryService {
   entryForEditting: EventEmitter<LearningEntry> = new EventEmitter();
 
   private getCollectionPath(goalId: string, learningEntryId: string = null) {
-    if (learningEntryId) {
-      return "Goals/" + goalId + this.serviceCollection + learningEntryId;
-    } else {
-      return "Goals/" + goalId + this.serviceCollection;
-    }
+    // if (learningEntryId) {      
+    //   return "Goals/" + goalId + this.serviceCollection + learningEntryId;
+    // } else {
+    //   return "Goals/" + goalId + this.serviceCollection;
+    // }
+    return "LearningEntries";
   }
 
   createLearningEntry(data: LearningEntry) {
     // console.warn("creating: ");
     // console.warn(data);
+    data.goalId = "deprecated";
     return new Promise<any>((resolve, reject) => {
       this.firestore
-        .collection(this.getCollectionPath(data.goalId))
+        // .collection(this.getCollectionPath(data.goalId))
+        .collection("LearningEntries")
         .add(data)
         .then(res => { }, err => reject(err));
     });
@@ -56,7 +59,8 @@ export class LearningEntryService {
 
   getLearningEntry(goalId: string, learningEntryId: string): Observable<LearningEntry> {
 
-    let docRef = this.firestore.collection("Goals/" + goalId + "/LearningEntries/").doc(learningEntryId);
+    // let docRef = this.firestore.collection("Goals/" + goalId + "/LearningEntries/").doc(learningEntryId);
+    let docRef = this.firestore.collection(this.serviceCollection).doc(learningEntryId);
     // console.warn(docRef);
     return docRef.get().pipe(
       map((doc) => {
@@ -79,7 +83,7 @@ export class LearningEntryService {
     Observable<any> |
     Observable<LearningEntry[]> {
     return this.firestore
-      .collection<LearningEntry>(this.getCollectionPath(goalId))
+      .collection<LearningEntry>(this.getCollectionPath(this.serviceCollection))
       .snapshotChanges()
       .pipe(
         map(docChangeActions => {

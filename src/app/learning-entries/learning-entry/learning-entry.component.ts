@@ -17,7 +17,6 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class LearningEntryComponent implements OnInit {
   public Editor = ClassicEditor;
-  @Input() goal: Goal;
   editEntry: LearningEntry;
   editMode: boolean = false;
   types = ["Note", "Video", "Article", "Blog", "Book", "Course", "Walkthrough"];
@@ -45,28 +44,20 @@ export class LearningEntryComponent implements OnInit {
 
     this.route.params.subscribe(
       (params) => {
-        this.goalId = params['goalId'];
         this.learningEntryId = params['learningEntryId'];
-        let gid = this.goalId;
         let eid = this.learningEntryId;
 
-        if (gid && eid) {
-          this.learningEntryService.getLearningEntry(gid, eid).subscribe((learningEntry) => {
+        if (eid) {
+          this.learningEntryService.getLearningEntry("", eid).subscribe((learningEntry) => {
             this.editEntry = learningEntry;
             if (this.editEntry) {
               this.editMode = true;
-              this.goalId = gid;
               this.form.setValue({
                 text: this.editEntry.text,
                 type: this.editEntry.type,
               });
             }
           });
-        }
-
-        if (gid) {
-          this.goalId = gid;
-          this.$goal = this.goalService.getGoal(gid);
         }
 
         // console.warn("goal id: ");
@@ -92,24 +83,15 @@ export class LearningEntryComponent implements OnInit {
     if (this.editMode) {
       this.editEntry.text = this.form.get('text').value;
       this.editEntry.type = this.form.get('type').value;
-      this.editEntry.goalId = this.goalId;
       this.learningEntryService.updateLearningEntry(this.editEntry);
     } else {
       let entry = new LearningEntry();
       entry = this.form.value;
       entry.dateTimeOfEntry = new Date();
-      entry.goalId = this.goalId;
       this.learningEntryService.createLearningEntry(entry);
     }
 
     this.router.navigate(['/goals']);
-
-    // this.editEntry = null;
-    // this.editMode = false;
-    // this.form.reset();
-    // this.form.patchValue({
-    //   type: this.default
-    // });
 
   }
 

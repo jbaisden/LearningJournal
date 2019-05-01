@@ -1,1 +1,14 @@
 <router-outlet></router-outlet>
+
+<table *ngIf="authService.isAuthenticated()">
+    <tr>
+        <td>
+            <h3>Learning Note <button type="button" [routerLink]="['/learningentries/add/']">Add Note</button> </h3>
+            <app-learning-entry-list></app-learning-entry-list>
+        </td>
+        <td>
+            <h3>Goals <button type="button" [routerLink]="['/goals/add']">Add Goal</button> </h3>
+            <app-goal-list></app-goal-list>
+        </td>
+    </tr>
+</table>

@@ -20,11 +20,10 @@ export class LearningEntryListComponent implements OnInit {
   ) { }
 
   learningEntries: Observable<LearningEntry[]>;
-  @Input() goal: Goal;
 
   ngOnInit() {
     this.learningEntries = this.learningEntryService
-      .getLearningEntries(this.goal.goalId, 'Not Implemented Yet');
+      .getLearningEntries("", 'Not Implemented Yet');
   }
 
   editLearningEntry(learningEntry: LearningEntry) {
@@ -32,8 +31,9 @@ export class LearningEntryListComponent implements OnInit {
   }
 
   getLearningEntryUrl(learningEntry: LearningEntry): string {
-    let url = "/goals/" + this.goal.goalId + "/learningentries/" +
-      learningEntry.learningEntryId;
+    // let url = "/goals/" + this.goal.goalId + "/learningentries/" +    
+    //   learningEntry.learningEntryId;
+    let url = "/learningentries/" + learningEntry.learningEntryId;
     return url;
   }
 

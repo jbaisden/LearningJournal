@@ -30,7 +30,7 @@ export class AuthService {
           let user = firebase.auth().currentUser;
           this.uid = user.uid;
           this.email = user.email;
-          this.router.navigate(['/goals']);
+          this.router.navigate(['/']);
           firebase.auth().currentUser.getIdToken()
             .then(
               (token: string) => this.token = token

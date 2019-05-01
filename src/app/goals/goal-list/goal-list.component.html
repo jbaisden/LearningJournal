@@ -1,5 +1,3 @@
-<h3>Goals <button type="button" [routerLink]="['add']">Add Goal</button> </h3>
-
 <ul style="list-style-type: none;">
   <li *ngFor="let goal of goals | async">
     <table>
@@ -7,11 +5,8 @@
         <td>
           <app-goal-item [goal]="goal"></app-goal-item>
         </td>
-        <td><a [routerLink]="['edit', goal.goalId]">Edit Goal</a></td>
-        <td><a [routerLink]="['/learning-entry/add/', goal.goalId]">Add Learning Entry</a></td>
+        <td><a [routerLink]="['/goals/', goal.goalId]">Edit Goal</a></td>
       </tr>
     </table>
-
-
   </li>
 </ul>

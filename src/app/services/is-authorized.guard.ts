@@ -12,7 +12,8 @@ export class IsAuthorizedGuard implements CanActivate, CanActivateChild {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.authService.isAuthenticated();
+    // return this.authService.isAuthenticated();
+    return true;
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {

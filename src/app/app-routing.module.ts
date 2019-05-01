@@ -13,11 +13,11 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent, canActivateChild: [IsAuthorizedGuard],
     children: [
-      { path: 'goals/:goalId/learningentries/:learningEntryId', component: LearningEntryComponent },
-      { path: 'goals/edit/:goalId', component: GoalComponent },
-      { path: 'goals/add', component: GoalComponent },
       { path: 'goals', component: GoalListComponent },
-      { path: 'learning-entry/add/:goalId', component: LearningEntryComponent }
+      { path: 'learningentries/:learningEntryId', component: LearningEntryComponent },
+      { path: 'learningentries/add/', component: LearningEntryComponent },
+      { path: 'goals/:goalId', component: GoalComponent },
+      { path: 'goals/add', component: GoalComponent },
     ]
   },
   {
