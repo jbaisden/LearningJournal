@@ -13,6 +13,7 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent, canActivateChild: [IsAuthorizedGuard],
     children: [
+      { path: '', component: AuthComponent, pathMatch: 'full', },
       { path: 'goals', component: GoalListComponent },
       { path: 'learningentries/:learningEntryId', component: LearningEntryComponent },
       { path: 'learningentries/add/', component: LearningEntryComponent },
@@ -32,7 +33,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
